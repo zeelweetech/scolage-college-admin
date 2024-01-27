@@ -14,6 +14,7 @@
     "@syncfusion/ej2-react-charts": "^22.2.12",
     "axios": "^1.6.2",
     "emoji-picker-react": "^4.5.2",
+    "google-map-react": "^2.2.1",
     "highcharts": "^11.2.0",
     "highcharts-react-official": "^3.2.1",
     "isurl": "^4.0.2",

@@ -109,7 +109,12 @@ const Dashboard = () => {
   const ChartData = async () => {
     try {
       const { data } = await axios.get(
-        `/clgadmin/dashboard/v2/get/counts/${CollageId}`
+        `/clgadmin/dashboard/v2/get/counts/${CollageId}`,
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
       );
       setCountData(data);
       console.log("data", data);

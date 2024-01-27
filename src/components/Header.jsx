@@ -257,7 +257,7 @@ const Header = ({ title = "Dashboard" }) => {
           <p>Hello {record?.college?.[0]?.collegename}, welcome.</p>
         </div>
       </div>
-      <div className="right">
+      {/* <div className="right">
         <div className="search-block">
           <label className="search-icon" htmlFor="search">
             <img src={searchIcon} alt="" />
@@ -326,7 +326,7 @@ const Header = ({ title = "Dashboard" }) => {
             <img src={moreIcon} alt="" />
           </button>
         </div>
-      </div>
+      </div> */}
     </HeaderStyles>
   );
 };

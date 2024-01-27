@@ -239,6 +239,7 @@ const Sidebar = () => {
          if (data) {
             localStorage.removeItem("allowPrivate");
             localStorage.removeItem("collegeProfileId");
+            localStorage.removeItem("token");
          }
          navigate('/signin')
          await verifyAuth()

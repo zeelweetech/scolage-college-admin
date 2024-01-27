@@ -97,6 +97,7 @@ const SignInForm = () => {
 
       localStorage.setItem("allowPrivate", status + statusText);
       localStorage.setItem("collegeProfileId", data.collegeid);
+      localStorage.setItem("token", data.accessToken);
       // document.cookie = `jwtToken=${data.token}`;
       await verifyAuth();
       navigate("/dashboard");
