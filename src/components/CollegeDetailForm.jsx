@@ -839,7 +839,12 @@ const CollegeDetailForm = ({ info }) => {
 
       const { data } = await axios.patch(
         `/v2/reg/clgdetail/update/${collegeId}`,
-        formData
+        formData,
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
       );
       setEditable(false);
       toast.dismiss(loading);
@@ -865,12 +870,11 @@ const CollegeDetailForm = ({ info }) => {
   }, [formData?.location]);
 
   const extractCoordinatesFromLink = (link) => {
-     // Extracting coordinates from the link
-     const regex = /@(-?\d+\.\d+),(-?\d+\.\d+),/;
-     const match = link?.match(regex);
-     console.log("link", link);
-     console.log("match", match);
-
+    // Extracting coordinates from the link
+    const regex = /@(-?\d+\.\d+),(-?\d+\.\d+),/;
+    const match = link?.match(regex);
+    console.log("link", link);
+    console.log("match", match);
 
     if (match && match.length === 3) {
       const latitude = parseFloat(match[1]);
@@ -949,13 +953,16 @@ const CollegeDetailForm = ({ info }) => {
                 bootstrapURLKeys={{
                   key: "AIzaSyCOyEzskqLr1BKQ7j7t_JfMcY-8yHdymi0",
                 }}
-                defaultCenter={{ lat: 21.17024, lng: 72.831062 }}
+                defaultCenter={{
+                  lat: coordinates?.latitude,
+                  lng: coordinates?.longitude,
+                }}
                 defaultZoom={11}
                 yesIWantToUseGoogleMapApiInternals
               >
                 <AnyReactComponent
-                  lat={21.17024}
-                  lng={72.831062}
+                  lat={coordinates?.latitude}
+                  lng={coordinates?.longitude}
                   text="My Marker"
                 />
               </GoogleMapReact>

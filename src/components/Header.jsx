@@ -237,7 +237,11 @@ const Header = ({ title = "Dashboard" }) => {
 
   const getApplicantsList = async () => {
     try {
-      const { data } = await axios.get(`/v2/studentlist/get/${CollageId}`);
+      const { data } = await axios.get(`/v2/studentlist/get/${CollageId}`, {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      });
       setRecord(data[0]);
     } catch (err) {
       console.log(err);

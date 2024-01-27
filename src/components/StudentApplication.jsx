@@ -230,7 +230,11 @@ const StudentApplication = () => {
 
   const getStudentDetails = async () => {
     try {
-      const { data } = await axios.get(`/v2/singlestudentlist/get/${id}`);
+      const { data } = await axios.get(`/v2/singlestudentlist/get/${id}`, {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      });
       setRecord(data[0]);
     } catch (err) {
       console.log(err);

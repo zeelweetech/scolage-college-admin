@@ -13,6 +13,7 @@
     "@syncfusion/ej2-base": "^22.2.12",
     "@syncfusion/ej2-react-charts": "^22.2.12",
     "axios": "^1.6.2",
+    "crypto-js": "^4.2.0",
     "emoji-picker-react": "^4.5.2",
     "google-map-react": "^2.2.1",
     "highcharts": "^11.2.0",

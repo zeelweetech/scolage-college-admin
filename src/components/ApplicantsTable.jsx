@@ -321,7 +321,11 @@ const ApplicantsTable = () => {
 
   const getApplicantsList = async () => {
     try {
-      const { data } = await axios.get(`/v2/studentlist/get/${CollageId}`);
+      const { data } = await axios.get(`/v2/studentlist/get/${CollageId}`, {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      });
       setRecord(data);
     } catch (err) {
       console.log(err);
