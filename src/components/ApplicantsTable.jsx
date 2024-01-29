@@ -392,6 +392,7 @@ const ApplicantsTable = () => {
     return (
       <TableHeaderStyles>
         <SearchboxStyles>
+          { console.log("record", record)}
           <label htmlFor="search">
             <svg
               width="23"
