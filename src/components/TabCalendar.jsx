@@ -16,20 +16,11 @@ const TabCalendar = ({ count }) => {
     <Wrapper>
       <TabView
       >
-        {/* className={
-          count?.acceptedCount
-            ? count?.acceptedCount
-            : count?.pendingCount
-            ? count?.pendingCount
-            : count?.rejectedCount
-            ? count?.rejectedCount
-            : ""
-        } */}
         <TabPanel header={`Accepted (${count?.acceptedCount})`}></TabPanel>
         <TabPanel header={`Pending (${count?.pendingCount})`}></TabPanel>
         <TabPanel header={`Rejected (${count?.rejectedCount})`}></TabPanel>
       </TabView>
-      <CalendarBlock />
+      <CalendarBlock count={count}/>
     </Wrapper>
   );
 };

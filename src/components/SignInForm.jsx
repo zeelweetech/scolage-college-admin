@@ -3,9 +3,10 @@ import FormInput from "./FormInput";
 import CustomCheckbox from "./CustomCheckbox";
 import Button from "./Button";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
+import React from "react";
 
 const Wrapper = styled.div`
   margin: 0 auto;
@@ -71,6 +72,7 @@ const Wrapper = styled.div`
 const SignInForm = () => {
   const { verifyAuth, auth } = useAuth();
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = React.useState(false);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -86,14 +88,7 @@ const SignInForm = () => {
           password: password,
         }
       );
-      const token = headers['Set-Cookie'];
-      console.log("stastus", status);
-      console.log("data", data);
-
-      console.log("statusText", statusText);
-      console.log("headers", headers);
-      console.log("token", token);
-
+      const token = headers["Set-Cookie"];
 
       localStorage.setItem("allowPrivate", status + statusText);
       localStorage.setItem("collegeProfileId", data.collegeid);
@@ -108,6 +103,10 @@ const SignInForm = () => {
       toast.dismiss(loading);
       toast.error("Invalid Email or Password !!");
     }
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
   };
 
   return (
@@ -127,14 +126,16 @@ const SignInForm = () => {
           />
           <FormInput
             title={"Password"}
-            type={"password"}
+            type={showPassword ? "text" : "password"}
             name={"password"}
             placeholder={"password"}
             id={"password"}
+            onTogglePassword={togglePasswordVisibility}
           />
         </div>
         <div className="form-cta">
           <CustomCheckbox />
+          <Link to="/forgot">Forgot password?</Link>
         </div>
         <div className="submit-btn">
           <Button type={"submit"}>Sign In</Button>

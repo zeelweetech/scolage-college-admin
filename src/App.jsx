@@ -16,44 +16,53 @@ import Demo from "./Demo";
 import Error404 from "./components/404";
 import { Toaster } from "react-hot-toast";
 import PrivateRoute from "./components/PrivateRoute";
+import Forgot from "./Forgot";
+import { LoadingBarProvider } from "./context/LoadingBarContext";
+import ProgressBar from "./components/LoadingBar";
+import ScrollToTop from "../helper/ScrollToTop";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <GlobalStyles />
-        <Toaster
-          position="bottom-right"
-          toastOptions={{
-            style: {
-              fontSize: "1.3rem",
-              background: "#212121",
-              color: "#fff",
-            },
-          }}
-        />
-        <Routes>
-          <Route path="/" element={<GoDash />} />
-          <Route path="/signin" element={<SignIn />} />
+        <LoadingBarProvider>
+        <ProgressBar /> 
+          <GlobalStyles />
+          <ScrollToTop />
+          <Toaster
+            position="bottom-right"
+            toastOptions={{
+              style: {
+                fontSize: "1.3rem",
+                // background: "#212121",
+                // color: "#fff",
+              },
+            }}
+          />
+          <Routes>
+            <Route path="/" element={<GoDash />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/forgot" element={<Forgot />} />
 
-          <Route element={<PrivateRoute />}>
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/college-profile" element={<CollegeProfile />} />
-            <Route path="/applicants" element={<Applicants />} />
-            <Route path="/applicants/:id" element={<StudentApplication />} />
-            <Route
-              path="/reacted-application"
-              element={<ReactedApplication />}
-            />
-            <Route path="/financial" element={<Financial />} />
-            <Route path="/feedback-form" element={<FeedBackForm />} />
-            <Route path="/query" element={<Inbox />} />
-            <Route path="/demo" element={<Demo />} />
-            <Route path="/team" element={<Team />} />
-            {/* <Route path="/team/:id" element={<TeamMember />} /> */}
-          </Route>
-          <Route path="/*" element={<Error404 />} />
-        </Routes>
+            <Route element={<PrivateRoute />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/college-profile" element={<CollegeProfile />} />
+              <Route path="/applicants" element={<Applicants />} />
+              <Route path="/applicants/:id" element={<StudentApplication />} />
+              <Route
+                path="/reacted-application"
+                element={<ReactedApplication />}
+              />
+              <Route path="/financial" element={<Financial />} />
+              <Route path="/feedback-form" element={<FeedBackForm />} />
+              <Route path="/query" element={<Inbox />} />
+              <Route path="/demo" element={<Demo />} />
+              <Route path="/team" element={<Team />} />
+              {/* <Route path="/team/:id" element={<TeamMember />} /> */}
+            </Route>
+            <Route path="/*" element={<Error404 />} />
+          </Routes>
+        </LoadingBarProvider>
       </BrowserRouter>
     </>
   );
