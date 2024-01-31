@@ -195,6 +195,7 @@ const CulturalBlock = ({ info }) => {
           {
             headers: {
               "Content-Type": "multipart/form-data",
+              Authorization: localStorage.getItem("token"),
             },
           }
         );

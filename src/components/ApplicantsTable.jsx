@@ -309,9 +309,28 @@ const StatusStyles = styled.p`
     }
   }
 `;
+const getStatus = (record) => {
+  switch (record.status) {
+    case "applied":
+      return "applied";
+
+    case "pending":
+      return "pending";
+
+    case "rejected":
+      return "rejected";
+
+    default:
+      break;
+  }
+};
 
 const StatusBody = (record) => {
-  return <StatusStyles className={record.status}>{record.status}</StatusStyles>;
+  return (
+    <StatusStyles className={getStatus(record.status)}>
+      {record.status}
+    </StatusStyles>
+  );
 };
 
 const ApplicantsTable = () => {
@@ -346,22 +365,6 @@ const ApplicantsTable = () => {
     );
   };
 
-  const getStatus = (record) => {
-    switch (record.status) {
-      case "applied":
-        return "applied";
-
-      case "pending":
-        return "pending";
-
-      case "rejected":
-        return "rejected";
-
-      default:
-        break;
-    }
-  };
-
   const [filters, setFilters] = useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
     //   name: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
@@ -392,7 +395,7 @@ const ApplicantsTable = () => {
     return (
       <TableHeaderStyles>
         <SearchboxStyles>
-          { console.log("record", record)}
+          {console.log("record", record)}
           <label htmlFor="search">
             <svg
               width="23"
@@ -503,12 +506,12 @@ const ApplicantsTable = () => {
           body={LocationBody}
           header="Location"
         />
-        <Column
+        {/* <Column
           className="tableText"
           style={{ textAlign: "center" }}
           field="SSCResult"
           header="SSC Expected Result %"
-        />
+        /> */}
         <Column
           className="tableText"
           style={{ textAlign: "center" }}

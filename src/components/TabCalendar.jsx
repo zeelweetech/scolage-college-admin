@@ -11,16 +11,14 @@ const Wrapper = styled.div`
 `;
 
 const TabCalendar = ({ count }) => {
-  console.log("count", count);
   return (
     <Wrapper>
-      <TabView
-      >
+      <TabView>
         <TabPanel header={`Accepted (${count?.acceptedCount})`}></TabPanel>
         <TabPanel header={`Pending (${count?.pendingCount})`}></TabPanel>
         <TabPanel header={`Rejected (${count?.rejectedCount})`}></TabPanel>
       </TabView>
-      <CalendarBlock count={count}/>
+      <CalendarBlock count={count} />
     </Wrapper>
   );
 };

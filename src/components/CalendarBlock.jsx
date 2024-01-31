@@ -73,40 +73,71 @@ const IndicatorDot = styled.p`
 
 const CalendarBlock = ({ count }) => {
   const [date, setDate] = useState("");
-  //   console.log("count", count);
-  //   const AcceptedDate = count?.acceptedDates;
 
-  //   const dateTemplate = (date) => {
-  //     if (date.day > 10 && date.day < 15) {
-  //       return (
-  //         <strong style={{ textDecoration: "line-through" }}>{date.day}</strong>
-  //       );
-  //     }
+  const AcceptedDate = count?.acceptedDates?.map((item) => {
+    return item;
+  });
+  const PandingDate = count?.pendingDates?.map((item) => {
+    return item;
+  });
+  const RejectedDate = count?.rejectedDates?.map((item) => {
+    return item;
+  });
 
-  //     return date.day;
-  //   };
+  const dateTemplate = (date) => {
+    const formattedDate = `${
+      date.month < 9 ? "0" + (date.month + 1) : date.month + 1
+    }/${date.day}/${date.year}`;
+    const isAccepted = AcceptedDate?.includes(formattedDate);
+    const isPanging = PandingDate?.includes(formattedDate);
+    const isRejected = RejectedDate?.includes(formattedDate);
 
-  //   const DataTemplate = async (item) => {
-  //    const currDate = new Date(item)
-  //    console.log("currDate" , currDate);
-  //    const dataStr = currDate.toISOString()
-  //     console.log("date", item);
-  //    //  const dataStr = item?.toISOString()?.split("T")[0];
-  //     const haslndicator = AcceptedDate?.includes(dataStr);
+    const dotStyle = {
+      width: "4px",
+      height: "4px",
+      backgroundColor: isAccepted
+        ? "#60269e"
+        : isPanging
+        ? "#F89B44"
+        : isRejected
+        ? "#cf92d1"
+        : "",
+      borderRadius: "50%",
+      display: "block",
+      marginLeft: "auto",
+      marginRight: "auto",
+      marginTop: "2px",
+    };
 
-  //     return (
-  //       <div>{haslndicator && <IndicatorDot>{item.getDate()}</IndicatorDot>}</div>
-  //     );
-  //   };
+    if (isAccepted) {
+      return (
+        <strong>
+          {date.day} <span style={dotStyle}></span>
+        </strong>
+      );
+    } else if (isPanging) {
+      return (
+        <strong>
+          {date.day} <span style={dotStyle}></span>
+        </strong>
+      );
+    } else if (isRejected) {
+      return (
+        <strong>
+          {date.day} <span style={dotStyle}></span>
+        </strong>
+      );
+    }
+
+    return date.day;
+  };
+
   return (
     <CalendarStyles
       value={date}
       onChange={(e) => setDate(e.value)}
       inline
-      // dateTemplate={dateTemplate}
-      dateTemplate={(date) => {
-        return <DateTemplateStyles>{date.day}</DateTemplateStyles>;
-      }}
+      dateTemplate={dateTemplate}
     />
   );
 };
