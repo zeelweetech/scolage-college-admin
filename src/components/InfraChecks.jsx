@@ -106,6 +106,9 @@ const InfraChecks = ({ data, infraChecks, setInfraChecks, name, disabled , formD
 
       // setInfraChecks(_checkedItems);
    };
+   console.log("data" , data);
+   console.log("formData" , formData);
+
 
    return (
       <CheckStyles className="flex align-items-center">

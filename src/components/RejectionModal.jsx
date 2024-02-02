@@ -113,7 +113,11 @@ const RejectionModal = ({ setShowModal, isAccepted, id, record }) => {
           acceptNote: values,
           applicationNo: id,
         };
-        await axios.patch(`/v2/stdappli/accept-reject/api`, body);
+        await axios.patch(`/v2/stdappli/accept-reject/api`, body, {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        });
         setShowModal(false);
       } catch (err) {
         console.log(err);

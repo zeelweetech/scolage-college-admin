@@ -86,8 +86,9 @@ const CalendarBlock = ({ count }) => {
 
   const dateTemplate = (date) => {
     const formattedDate = `${
-      date.month < 9 ? "0" + (date.month + 1) : date.month + 1
-    }/${date.day}/${date.year}`;
+      date.month < 10 ? "0" + (date.month + 1) : date.month + 1
+    }/${date.day < 10 ? "0" + date.day : date.day}/${date.year}`;
+    console.log("formattedDate", formattedDate);
     const isAccepted = AcceptedDate?.includes(formattedDate);
     const isPanging = PandingDate?.includes(formattedDate);
     const isRejected = RejectedDate?.includes(formattedDate);
