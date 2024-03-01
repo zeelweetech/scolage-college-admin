@@ -142,9 +142,9 @@ const ListItem = ({ item, index }) => {
         </div>
       </div>
       <div className="right">
-        <div className="location">
+        {/* <div className="location">
           <p>{item?.college?.[0]?.location}</p>
-        </div>
+        </div> */}
         <div className="status">
           <p>Onboard</p>
         </div>
@@ -165,13 +165,17 @@ const RecentAdmissionBlock = ({ countData }) => {
 
       <div className="Radmission-list">
         <ul>
-          {countData?.recentAdmissions?.map((item, index) => {
-            return (
-              <>
-                <ListItem item={item} index={index} />
-              </>
-            );
-          })}
+          {countData?.recentAdmissions?.length > 0 ? (
+            countData?.recentAdmissions?.map((item, index) => {
+              return (
+                <>
+                  <ListItem item={item} index={index} />
+                </>
+              );
+            })
+          ) : (
+            <div className="data">No Data Found</div>
+          )}
         </ul>
       </div>
     </Wrapper>

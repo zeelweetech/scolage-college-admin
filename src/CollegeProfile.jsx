@@ -25,6 +25,7 @@ import SportUploadBlock from "./components/SportsUploadBlock";
 import CulturalBlock from "./components/CulturalBlock";
 import AcademicBlock from "./components/AcademicBlock";
 import YoutubeView from "./components/YoutubeView";
+import LoginId from "./components/LoginId";
 
 const CollegeProfile = () => {
   const [collegeInfo, setCollegeInfo] = useState(null);
@@ -52,11 +53,14 @@ const CollegeProfile = () => {
   useEffect(() => {
     fetchData();
   }, []);
-console.log("collegeInfo" , collegeInfo);
+  console.log("collegeInfo****", collegeInfo);
   return (
     <Layout headerTitle={"College Profile"}>
+      <AddClgAccordion accTitle={"COLLEGE LOGIN IDS"}>
+        {collegeInfo && <LoginId info={collegeInfo?.college} />}
+      </AddClgAccordion>
       <AddClgAccordion accTitle={"College Details"}>
-        {collegeInfo && <CollegeDetailForm info={collegeInfo?.college?.[0]} />}
+        {collegeInfo && <CollegeDetailForm info={collegeInfo?.college} />}
       </AddClgAccordion>
 
       <AddClgAccordion accTitle={"INFRASTRUCTURE"}>
@@ -95,9 +99,7 @@ console.log("collegeInfo" , collegeInfo);
         {collegeInfo && <CollegeImagesBlock info={collegeInfo?.clgimage} />}
       </AddClgAccordion>
       <AddClgAccordion accTitle={"YOUTUBE LINKS"}>
-        {collegeInfo && (
-          <YoutubeView info={collegeInfo?.videoUrl?.[0]} />
-        )}
+        {collegeInfo && <YoutubeView info={collegeInfo?.videoUrl?.[0]} />}
       </AddClgAccordion>
       <AddClgAccordion accTitle={"COLLEGE POLICY & SOCIAL MEDIA"}>
         {collegeInfo && (

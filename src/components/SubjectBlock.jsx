@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { Dropdown } from "primereact/dropdown";
 
 const Wrapper = styled.div`
   .subject-seats-block {
@@ -130,11 +131,55 @@ const SubjectSeatStyles = styled.div`
   }
 `;
 
+const DropdownFieldStyles = styled.div`
+  display: flex;
+  align-items: center;
+  padding-bottom: 20px;
+
+  p {
+    width: 100px;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 20px;
+    color: #000000;
+    margin-right: 35px;
+    display: flex;
+  }
+
+  .dropdown-field {
+    width: calc(100% - 1x);
+
+    .p-dropdown {
+      width: 100%;
+      border: 1px solid #707070;
+      border-radius: 16px;
+      box-shadow: none;
+      .p-dropdown-label {
+        padding: 12px 20px;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 20px;
+        color: #7a86a1;
+        text-transform: capitalize;
+      }
+    }
+  }
+`;
+
 const SubjectBlock = ({ info }) => {
   // console.log(info);
   const [subjectSeat, setSubjectSeat] = useState([]);
   const [editable, setEditable] = useState(false);
   const [newSubjectSeat, setNewSubjectSeat] = useState([]);
+  const systemType = [
+    { subjectname: "BCA" },
+    { subjectname: "MBA" },
+    { subjectname: "BBA" },
+    { subjectname: "MCA" },
+    { subjectname: "Computer Eng" },
+    { subjectname: "IT Eng" },
+    { subjectname: "Pharmacy" },
+  ];
 
   const setFetchedData = (info) => {
     const tempArr = [];
@@ -265,14 +310,28 @@ const SubjectBlock = ({ info }) => {
           {subjectSeat.map((item, i) => (
             <SubjectSeatStyles key={i}>
               <div className="subject-field">
-                <input
+                <DropdownFieldStyles>
+                  <div className="dropdown-field">
+                    <Dropdown
+                      optionLabel="subjectname"
+                      optionValue="subjectname"
+                      name="subjectname"
+                      onChange={(e) => handleChange(e, i)}
+                      value={item.subjectname}
+                      options={systemType}
+                      placeholder="Sub. Na"
+                      required
+                    />
+                  </div>
+                </DropdownFieldStyles>
+                {/* <input
                   type="text"
                   name="subjectname"
                   value={item.subjectname}
                   required
                   placeholder="Subject Name"
                   onChange={(e) => handleChange(e, i)}
-                />
+                /> */}
               </div>
               <div className="sub-desc-field">
                 <textarea

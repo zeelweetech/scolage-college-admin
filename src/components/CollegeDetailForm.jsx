@@ -726,7 +726,7 @@ const TimingStyles = styled.div`
 `;
 
 const CollegeDetailForm = ({ info }) => {
-  // console.log(info);
+  console.log("info", info);
   const [formData, setFormData] = useState(info);
   const [phoneType, setPhoneType] = useState("mobile");
   const [phoneType2, setPhoneType2] = useState("mobile");
@@ -1180,6 +1180,22 @@ const CollegeDetailForm = ({ info }) => {
               </div>
             </div>
           </TimingStyles>
+          <InputField
+            name={"History_Achievements"}
+            value={formData?.History_Achievements}
+            handleChange={handleChange}
+            title="History and Achievements"
+            id="History_Achievements"
+            placeholder="History_Achievements"
+          />
+          <InputField
+            name={"Description"}
+            value={formData?.Description}
+            handleChange={handleChange}
+            title="Description"
+            id="Description"
+            placeholder="Description"
+          />
 
           <MoreInfoField
             name={"more_info"}
