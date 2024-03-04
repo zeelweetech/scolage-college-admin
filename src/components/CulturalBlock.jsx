@@ -151,7 +151,7 @@ const CulturalBlock = ({ info }) => {
     e.preventDefault();
     const loading = toast.loading("Adding details...");
     try {
-      const collegeId = localStorage.getItem("collegeId");
+      const collegeId = localStorage.getItem("collegeProfileId");
 
       if (!collegeId) {
         toast.dismiss(loading);
@@ -298,11 +298,11 @@ const CulturalBlock = ({ info }) => {
     const loading = toast.loading("Removing Media File...");
     try {
       if (editable) {
-        const { data } = await axios.delete(`/culturalimage/delete/${id}` , {
-         headers: {
-           Authorization: localStorage.getItem("token"),
-         },
-       });
+        const { data } = await axios.delete(`/culturalimage/delete/${id}`, {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        });
 
         const tempArray = [...culturalList];
         tempArray.splice(index, 1);
