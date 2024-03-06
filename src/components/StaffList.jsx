@@ -94,10 +94,10 @@ const Wrapper = styled.li`
   }
 `;
 
-const StaffList = ({ faculty }) => {
+const StaffList = ({ faculty , fetchData}) => {
   return (
     <Wrapper>
-      {faculty.isOpen === true ? (
+      {/* {faculty.isOpen === true ? ( */}
         <div className="faculty-info">
           <div className="faculty-in Fname">
             <p>{faculty.name}</p>
@@ -111,13 +111,13 @@ const StaffList = ({ faculty }) => {
             </div>
           </div>
         </div>
-      ) : (
+      {/* ) : (
         ""
-      )}
+      )} */}
 
       <div className="Fstatus">
         <div className="visibility-status">
-          <VisibilityStatus Fid={faculty.staffid} visi={faculty.isOpen} />
+          <VisibilityStatus Fid={faculty.staffid} visi={faculty.isOpen} fetchData={fetchData}/>
         </div>
 
         <div className="edit-button">

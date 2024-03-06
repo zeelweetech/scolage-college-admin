@@ -39,7 +39,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const InfrastructureForm = ({ info }) => {
+const InfrastructureForm = ({ info, fetchData }) => {
   // console.log(info)
   const [infraChecks, setInfraChecks] = useState([]);
   const [editable, setEditable] = useState(false);
@@ -96,6 +96,7 @@ const InfrastructureForm = ({ info }) => {
         }
       );
       setEditable(false);
+      fetchData();
       toast.dismiss(loading);
       toast.success("Details updated successfully !!");
     } catch (err) {

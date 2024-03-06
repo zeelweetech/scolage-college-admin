@@ -307,7 +307,7 @@ const valueTemplate = (option) => {
     );
   }
 };
-const StaffForm = ({ staffData, setStaffData }) => {
+const StaffForm = ({ staffData, setStaffData, fetchData }) => {
   const [totalExp, setTotalExp] = useState(10);
   const [currentExp, setCurrentExp] = useState(2);
   const [avatar, setAvatar] = useState();
@@ -377,6 +377,7 @@ const StaffForm = ({ staffData, setStaffData }) => {
         }
       );
       setStaffData([...staffData, data.data]);
+      fetchData();
       toast.dismiss(loading);
       toast.success("Details added successfully");
       formRef.current.reset();

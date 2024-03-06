@@ -120,7 +120,7 @@ const InputField = ({ title, name, placeholder, value, handleChange }) => {
   );
 };
 
-const TandCBlock = ({ info }) => {
+const TandCBlock = ({ info, fetchData }) => {
   console.log(info);
   const [editable, setEditable] = useState(false);
   const [formData, setFormData] = useState(info);
@@ -148,6 +148,7 @@ const TandCBlock = ({ info }) => {
         }
       );
       setEditable(false);
+      fetchData();
       toast.dismiss(loading);
       toast.success("Details Updated successfully !!");
     } catch (err) {

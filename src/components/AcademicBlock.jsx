@@ -123,7 +123,7 @@ const GalleryStyle = styled.div`
   }
 `;
 
-const AcademicBlock = ({ info }) => {
+const AcademicBlock = ({ info, fetchData }) => {
   // console.log(info)
   const [academicList, setAcademicList] = useState([
     { image: "", more_info: "", imgPreview: "" },
@@ -210,6 +210,7 @@ const AcademicBlock = ({ info }) => {
         }
       }
       setEditable(false);
+      fetchData();
       toast.dismiss(loading);
       toast.success("Details added successfully");
     } catch (err) {
@@ -301,11 +302,11 @@ const AcademicBlock = ({ info }) => {
     const loading = toast.loading("Removing Media File...");
     try {
       if (editable) {
-        const { data } = await axios.delete(`/academic/delete/${id}` , {
-         headers: {
-           Authorization: localStorage.getItem("token"),
-         },
-       });
+        const { data } = await axios.delete(`/academic/delete/${id}`, {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        });
 
         const tempArray = [...academicList];
         tempArray.splice(index, 1);

@@ -121,7 +121,7 @@ const TopperItemStyles = styled.div`
   }
 `;
 
-const ToppersBlock = ({ info }) => {
+const ToppersBlock = ({ info, fetchData }) => {
   console.log(info);
   const [topperInfoList, setTopperInfoList] = useState([
     {
@@ -234,6 +234,7 @@ const ToppersBlock = ({ info }) => {
         }
       }
       setEditable(false);
+      fetchData();
       toast.dismiss(loading);
       toast.success("Details updated successfully");
     } catch (err) {

@@ -166,7 +166,7 @@ const DropdownFieldStyles = styled.div`
   }
 `;
 
-const SubjectBlock = ({ info }) => {
+const SubjectBlock = ({ info, fetchData }) => {
   // console.log(info);
   const [subjectSeat, setSubjectSeat] = useState([]);
   const [editable, setEditable] = useState(false);
@@ -276,6 +276,7 @@ const SubjectBlock = ({ info }) => {
         }
       }
       setEditable(false);
+      fetchData();
       toast.dismiss(loading);
       toast.success("Details updated successfully");
     } catch (err) {

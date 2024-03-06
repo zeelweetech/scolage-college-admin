@@ -57,7 +57,7 @@ const RadioStyles = styled.div`
   }
 `;
 
-const VisibilityStatus = ({ Fid, visi }) => {
+const VisibilityStatus = ({ Fid, visi, fetchData }) => {
   const [visibility, setVisibility] = useState(visi);
 
   const handleFormSubmit = async (newVisibility) => {
@@ -74,6 +74,7 @@ const VisibilityStatus = ({ Fid, visi }) => {
           Authorization: localStorage.getItem("token"),
         },
       });
+      fetchData();
       // setFetchedValue();
       toast.dismiss(loading);
       toast.success("Details updated successfully !!");

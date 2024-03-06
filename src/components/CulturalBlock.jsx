@@ -122,7 +122,7 @@ const GalleryStyle = styled.div`
   }
 `;
 
-const CulturalBlock = ({ info }) => {
+const CulturalBlock = ({ info, fetchData }) => {
   const [culturalList, setCulturalList] = useState([]);
   const [, updateState] = React.useState();
   const forceUpdate = React.useCallback(() => updateState({}), []);
@@ -206,6 +206,7 @@ const CulturalBlock = ({ info }) => {
         }
       }
       setEditable(false);
+      fetchData();
       toast.dismiss(loading);
       toast.success("Details added successfully");
     } catch (err) {

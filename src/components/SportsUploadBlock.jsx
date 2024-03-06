@@ -122,7 +122,7 @@ const GalleryStyle = styled.div`
   }
 `;
 
-const SportUploadBlock = ({ info }) => {
+const SportUploadBlock = ({ info, fetchData }) => {
   console.log(info);
   const [sportsList, setSportsList] = useState([]);
   const [, updateState] = React.useState();
@@ -206,6 +206,7 @@ const SportUploadBlock = ({ info }) => {
         setFetchedValue(newList.data);
       }
       setEditable(false);
+      fetchData();
       toast.dismiss(loading);
       toast.success("Details updated successfully");
     } catch (err) {

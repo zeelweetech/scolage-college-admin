@@ -60,50 +60,55 @@ const CollegeProfile = () => {
         {collegeInfo && <LoginId info={collegeInfo?.college} />}
       </AddClgAccordion>
       <AddClgAccordion accTitle={"College Details"}>
-        {collegeInfo && <CollegeDetailForm info={collegeInfo?.college} />}
+        {collegeInfo && <CollegeDetailForm info={collegeInfo?.college} fetchData={fetchData}/>}
       </AddClgAccordion>
 
       <AddClgAccordion accTitle={"INFRASTRUCTURE"}>
-        {collegeInfo && <InfrastructureForm info={collegeInfo?.infra?.[0]} />}
+        {collegeInfo && <InfrastructureForm info={collegeInfo?.infra?.[0]} fetchData={fetchData}/>}
       </AddClgAccordion>
       <AddClgAccordion accTitle={"HIGHLIGHTS"}>
-        {collegeInfo && <HighlightForm info={collegeInfo?.highlight?.[0]} />}
+        {collegeInfo && <HighlightForm info={collegeInfo?.highlight?.[0]} fetchData={fetchData}/>}
       </AddClgAccordion>
       <AddClgAccordion accTitle={"SPORTS"}>
-        {collegeInfo && <SportUploadBlock info={collegeInfo?.sports} />}
+        {collegeInfo && <SportUploadBlock info={collegeInfo?.sports} fetchData={fetchData}/>}
         {/* <GalleryBlock /> */}
       </AddClgAccordion>
       <AddClgAccordion accTitle={"CULTURAL"}>
-        {collegeInfo && <CulturalBlock info={collegeInfo?.cultural} />}
+        {collegeInfo && <CulturalBlock info={collegeInfo?.cultural} fetchData={fetchData}/>}
         {/* <GalleryBlock /> */}
       </AddClgAccordion>
       <AddClgAccordion accTitle={"ACADEMICS"}>
-        {collegeInfo && <AcademicBlock info={collegeInfo?.acedemic} />}
+        {collegeInfo && <AcademicBlock info={collegeInfo?.acedemic} fetchData={fetchData}/>}
         {/* <GalleryBlock /> */}
       </AddClgAccordion>
       <AddClgAccordion accTitle={"ALUMNI AND TOPPERS"}>
         {collegeInfo && (
-          <ToppersBlock info={collegeInfo?.alumini_and_toppers} />
+          <ToppersBlock info={collegeInfo?.alumini_and_toppers} fetchData={fetchData}/>
         )}
       </AddClgAccordion>
       <AddClgAccordion accTitle={"MANAGEMENT & STAFF"}>
-        {collegeInfo && <StaffBlock info={collegeInfo?.management_staff} />}
+        {collegeInfo && (
+          <StaffBlock
+            info={collegeInfo?.management_staff}
+            fetchData={fetchData}
+          />
+        )}
       </AddClgAccordion>
       <AddClgAccordion accTitle={"SUBJECTS"}>
-        {collegeInfo && <SubjectBlock info={collegeInfo?.subject} />}
+        {collegeInfo && <SubjectBlock info={collegeInfo?.subject} fetchData={fetchData}/>}
       </AddClgAccordion>
       <AddClgAccordion accTitle={"FEE STRUCTURE"}>
-        {collegeInfo && <FeesBlock info={collegeInfo?.feeStructure?.[0]} />}
+        {collegeInfo && <FeesBlock info={collegeInfo?.feeStructure?.[0]} fetchData={fetchData}/>}
       </AddClgAccordion>
       <AddClgAccordion accTitle={"COLLEGE IMAGES"}>
-        {collegeInfo && <CollegeImagesBlock info={collegeInfo?.clgimage} />}
+        {collegeInfo && <CollegeImagesBlock info={collegeInfo?.clgimage} fetchData={fetchData}/>}
       </AddClgAccordion>
       <AddClgAccordion accTitle={"YOUTUBE LINKS"}>
-        {collegeInfo && <YoutubeView info={collegeInfo?.videoUrl?.[0]} />}
+        {collegeInfo && <YoutubeView info={collegeInfo?.videoUrl?.[0]} fetchData={fetchData}/>}
       </AddClgAccordion>
       <AddClgAccordion accTitle={"COLLEGE POLICY & SOCIAL MEDIA"}>
         {collegeInfo && (
-          <TandCBlock info={collegeInfo?.clgpolicySocialMedia?.[0]} />
+          <TandCBlock info={collegeInfo?.clgpolicySocialMedia?.[0]} fetchData={fetchData}/>
         )}
       </AddClgAccordion>
     </Layout>

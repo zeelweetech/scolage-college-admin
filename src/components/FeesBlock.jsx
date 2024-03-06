@@ -41,7 +41,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const FeesBlock = ({ info }) => {
+const FeesBlock = ({ info, fetchData }) => {
   // console.log(info);
   const [note, setNote] = useState(info);
   const [editable, setEditable] = useState(false);
@@ -86,7 +86,7 @@ const FeesBlock = ({ info }) => {
       );
 
       setEditable(false);
-
+      fetchData();
       toast.dismiss(loading);
       toast.success("Details saved successfully.");
     } catch (err) {

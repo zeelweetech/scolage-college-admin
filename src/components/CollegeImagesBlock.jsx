@@ -127,7 +127,7 @@ const ImageItemStyle = styled.div`
   }
 `;
 
-const CollegeImagesBlock = ({ info }) => {
+const CollegeImagesBlock = ({ info, fetchData }) => {
   console.log(info);
   const [collegeImage, setCollegeImage] = useState([]);
   const [editable, setEditable] = useState(false);
@@ -280,6 +280,7 @@ const CollegeImagesBlock = ({ info }) => {
         }
       }
       setEditable(false);
+      fetchData();
       toast.dismiss(loading);
       toast.success("Details added successfully");
     } catch (err) {
@@ -421,7 +422,7 @@ const CollegeImagesBlock = ({ info }) => {
             className="cancel-btn-cta"
             onClick={() => {
               setEditable(false);
-              setCollegeImage(info);
+              // setCollegeImage(info);
             }}
           >
             Cancel

@@ -46,7 +46,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const HighlightForm = ({ info }) => {
+const HighlightForm = ({ info, fetchData }) => {
   const highlightCheckData = [
     {
       id: 1,
@@ -131,6 +131,7 @@ const HighlightForm = ({ info }) => {
         }
       );
       setEditable(false);
+      fetchData();
       toast.dismiss(loading);
       toast.success("Details updated successfully !!");
     } catch (err) {

@@ -725,7 +725,7 @@ const TimingStyles = styled.div`
   }
 `;
 
-const CollegeDetailForm = ({ info }) => {
+const CollegeDetailForm = ({ info, fetchData }) => {
   console.log("info", info);
   const [formData, setFormData] = useState(info);
   const [phoneType, setPhoneType] = useState("mobile");
@@ -847,6 +847,7 @@ const CollegeDetailForm = ({ info }) => {
         }
       );
       setEditable(false);
+      fetchData();
       toast.dismiss(loading);
       toast.success("Details updated successfully !!");
     } catch (err) {
@@ -858,12 +859,8 @@ const CollegeDetailForm = ({ info }) => {
 
   const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
-  console.log("formData", formData?.location);
-
   useEffect(() => {
     const googleMapsLink = formData?.location;
-    console.log("googleMapsLink", googleMapsLink);
-
     const extractedCoordinates = extractCoordinatesFromLink(googleMapsLink);
     console.log("extractedCoordinates", extractedCoordinates);
     setCoordinates(extractedCoordinates);
