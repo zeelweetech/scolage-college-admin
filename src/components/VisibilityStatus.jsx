@@ -75,6 +75,7 @@ const VisibilityStatus = ({ Fid, visi, fetchData }) => {
         },
       });
       fetchData();
+      window.location.reload();
       // setFetchedValue();
       toast.dismiss(loading);
       toast.success("Details updated successfully !!");

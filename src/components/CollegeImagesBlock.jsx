@@ -281,6 +281,7 @@ const CollegeImagesBlock = ({ info, fetchData }) => {
       }
       setEditable(false);
       fetchData();
+      window.location.reload();
       toast.dismiss(loading);
       toast.success("Details added successfully");
     } catch (err) {

@@ -132,6 +132,7 @@ const HighlightForm = ({ info, fetchData }) => {
       );
       setEditable(false);
       fetchData();
+      window.location.reload();
       toast.dismiss(loading);
       toast.success("Details updated successfully !!");
     } catch (err) {

@@ -378,6 +378,7 @@ const StaffForm = ({ staffData, setStaffData, fetchData }) => {
       );
       setStaffData([...staffData, data.data]);
       fetchData();
+      window.location.reload();
       toast.dismiss(loading);
       toast.success("Details added successfully");
       formRef.current.reset();
