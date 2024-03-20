@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import AddIcon from "../Icons/AddIcon";
 import { Dropdown } from "primereact/dropdown";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
@@ -146,14 +146,19 @@ const InputFieldStyles = styled.div`
   }
 `;
 
-const InputField = ({ title, name, placeholder }) => {
+const InputField = ({ title, name, placeholder, value }) => {
   return (
     <InputFieldStyles>
       <div className="label">
         <p>{title}</p>
       </div>
       <div className="field">
-        <input type="text" name={name} placeholder={placeholder} />
+        <input
+          type="text"
+          name={name}
+          placeholder={placeholder}
+          defaultValue={value || ""}
+        />
       </div>
     </InputFieldStyles>
   );
@@ -275,7 +280,7 @@ const AboutFieldStyles = styled.div`
   }
 `;
 
-const AboutField = () => {
+const AboutField = ({ value }) => {
   return (
     <AboutFieldStyles>
       <div className="label">
@@ -283,7 +288,7 @@ const AboutField = () => {
       </div>
       <div className="field">
         <div className="about-textarea">
-          <textarea name="about"></textarea>
+          <textarea name="about" defaultValue={value || ""}></textarea>
         </div>
       </div>
     </AboutFieldStyles>
@@ -307,7 +312,14 @@ const valueTemplate = (option) => {
     );
   }
 };
-const StaffForm = ({ staffData, setStaffData, fetchData }) => {
+const StaffForm = ({
+  staffData,
+  setStaffData,
+  fetchData,
+  editData,
+  setEditData,
+  setSelectedId,
+}) => {
   const [totalExp, setTotalExp] = useState(10);
   const [currentExp, setCurrentExp] = useState(2);
   const [avatar, setAvatar] = useState();
@@ -315,6 +327,20 @@ const StaffForm = ({ staffData, setStaffData, fetchData }) => {
   const exp = new Array(30).fill(1).map((item, index) => item + index);
   const inputRef = useRef(null);
   const formRef = useRef(null);
+
+  useEffect(() => {
+    if (editData?.staffid) {
+      const TotleExp = editData?.experience?.[0]?.total;
+      const CurrentExp = editData?.experience?.[0]?.current;
+      setTotalExp(+TotleExp);
+      setCurrentExp(+CurrentExp);
+      setAvatarPreview(editData.url);
+    } else {
+      setAvatarPreview(null);
+      setTotalExp(10);
+      setCurrentExp(2);
+    }
+  }, [editData?.staffid]);
 
   const [, updateState] = React.useState();
   const forceUpdate = React.useCallback(() => updateState({}), []);
@@ -366,23 +392,43 @@ const StaffForm = ({ staffData, setStaffData, fetchData }) => {
       formData.append("designation", e.target.designation.value);
       formData.append("about", e.target.about.value);
 
-      const { data } = await axios.post(
-        "/v2/reg/management_staffdetail",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: localStorage.getItem("token"),
-          },
-        }
-      );
-      setStaffData([...staffData, data.data]);
-      fetchData();
-      window.location.reload();
-      toast.dismiss(loading);
-      toast.success("Details added successfully");
-      formRef.current.reset();
-      setAvatarPreview(null);
+      if (editData?.staffid) {
+        const { data } = await axios.patch(
+          `/v2/edit/management_staffdetail/${editData?.staffid}`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: localStorage.getItem("token"),
+            },
+          }
+        );
+        setStaffData([...staffData, data.data]);
+        fetchData();
+        window.location.reload();
+        toast.dismiss(loading);
+        toast.success("Details added successfully");
+        formRef.current.reset();
+        setAvatarPreview(null);
+      } else {
+        const { data } = await axios.post(
+          "/v2/reg/management_staffdetail",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: localStorage.getItem("token"),
+            },
+          }
+        );
+        setStaffData([...staffData, data.data]);
+        fetchData();
+        window.location.reload();
+        toast.dismiss(loading);
+        toast.success("Details added successfully");
+        formRef.current.reset();
+        setAvatarPreview(null);
+      }
     } catch (err) {
       console.log(err);
       toast.dismiss(loading);
@@ -426,11 +472,13 @@ const StaffForm = ({ staffData, setStaffData, fetchData }) => {
           title={"name"}
           name="name"
           placeholder="Ravindar Narayana"
+          value={editData?.staffid ? editData.name : ""}
         />
         <InputField
           title={"Qualification"}
           name="qualification"
           placeholder="PHD in Science"
+          value={editData?.staffid ? editData.qualification : ""}
         />
         <ExperienceField
           totalExp={totalExp}
@@ -445,10 +493,22 @@ const StaffForm = ({ staffData, setStaffData, fetchData }) => {
           title={"Designation"}
           name="designation"
           placeholder="Science Teacher"
+          value={editData?.staffid ? editData.designation : ""}
         />
-        <AboutField />
+        <AboutField value={editData?.staffid ? editData.about : ""} />
 
         <div className="form-ctas">
+          {editData?.staffid && (
+            <button
+              className="cancel-btn-cta"
+              onClick={() => {
+                setEditData();
+                setSelectedId();
+              }}
+            >
+              Cancel
+            </button>
+          )}
           {/* <button>Add</button> */}
           <button type="submit">Save</button>
         </div>

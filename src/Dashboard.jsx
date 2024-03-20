@@ -8,6 +8,7 @@ import OccupancyBlock from "./components/OccupancyBlock";
 import RatingReviewBlock from "./components/RatingReviewBlock";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useLoadingBar } from "./context/LoadingBarContext";
 
 const Wrapper = styled.div`
   .dash-row-main {
@@ -105,9 +106,12 @@ const Wrapper = styled.div`
 const Dashboard = () => {
   const [countData, setCountData] = useState();
   const CollageId = localStorage.getItem("collegeProfileId");
+  const { setProgressBar } = useLoadingBar();
 
   const ChartData = async () => {
+    setProgressBar(0);
     try {
+      setProgressBar(40);
       const { data } = await axios.get(
         `/clgadmin/dashboard/v2/get/counts/${CollageId}`,
         {
@@ -116,10 +120,12 @@ const Dashboard = () => {
           },
         }
       );
+      setProgressBar(50);
       setCountData(data);
-      console.log("data", data);
+      setProgressBar(100);
     } catch (err) {
       console.log("err", err);
+      setProgressBar(0);
     }
   };
 

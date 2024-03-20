@@ -54,6 +54,15 @@ const Wrapper = styled.div`
 const StaffBlock = ({ info, fetchData }) => {
   console.log(info);
   const [staffData, setStaffData] = useState([]);
+  const [selectedId, setSelectedId] = useState();
+  const [editData, setEditData] = useState();
+
+  useEffect(() => {
+    const selectedData = info?.filter((item) => {
+      return item?.staffid === selectedId;
+    })?.[0];
+    setEditData(selectedData);
+  }, [editData === undefined ? editData : "", selectedId]);
 
   const setFetchedValue = () => {
     setStaffData(info);
@@ -96,7 +105,12 @@ const StaffBlock = ({ info, fetchData }) => {
         <ul>
           {staffData?.length === 0 && <p>No Staff Data</p>}
           {staffData.map((faculty, index) => (
-            <StaffList faculty={faculty} key={index} fetchData={fetchData} />
+            <StaffList
+              faculty={faculty}
+              key={index}
+              fetchData={fetchData}
+              setSelectedId={setSelectedId}
+            />
           ))}
         </ul>
       </div>
@@ -105,6 +119,9 @@ const StaffBlock = ({ info, fetchData }) => {
           staffData={staffData}
           setStaffData={setStaffData}
           fetchData={fetchData}
+          editData={editData}
+          setEditData={setEditData}
+          setSelectedId={setSelectedId}
         />
       </div>
     </Wrapper>

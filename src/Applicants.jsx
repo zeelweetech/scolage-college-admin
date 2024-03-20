@@ -7,6 +7,7 @@ import TabCalendar from "./components/TabCalendar";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useLoadingBar } from "./context/LoadingBarContext";
 
 const Wrapper = styled.div`
   display: flex;
@@ -85,9 +86,13 @@ const Applicants = () => {
   const [count, setCount] = useState();
   const [data, setData] = useState();
   const CollegeId = localStorage.getItem("collegeProfileId");
+  const { setProgressBar } = useLoadingBar();
   const CountData = async () => {
+    setProgressBar(0);
     try {
+      setProgressBar(40);
       const { data } = await axios.get(`/v2/get/admission/status/${CollegeId}`);
+      setProgressBar(50);
       setCount(data);
       setData([
         { name: "Accepted", y: count?.acceptedCount, color: "#60269e" },
@@ -95,7 +100,9 @@ const Applicants = () => {
         { name: "Rejected", y: count?.rejectedCount, color: "#cf92d1" },
         //  { name: "Withdraw", y: 20, color: "#707070" },
       ]);
+      setProgressBar(100);
     } catch (err) {
+      setProgressBar(0);
       console.log(err);
       toast.error("Something went wrong");
     }
