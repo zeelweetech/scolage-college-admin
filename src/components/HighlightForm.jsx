@@ -134,11 +134,11 @@ const HighlightForm = ({ info, fetchData }) => {
       fetchData();
       window.location.reload();
       toast.dismiss(loading);
-      toast.success("Details updated successfully !!");
+      toast.success(data?.message);
     } catch (err) {
       console.log(err);
       toast.dismiss(loading);
-      toast.error("Something went wrong, please try again !!");
+      toast.error(err?.response?.data?.error);
     }
   };
 
@@ -168,6 +168,7 @@ const HighlightForm = ({ info, fetchData }) => {
             value={formData?.safety_security}
             name="safety_security"
             onChange={handleChange}
+            placeholder="Enter a safety and security"
           ></textarea>
         </div>
       </Wrapper>

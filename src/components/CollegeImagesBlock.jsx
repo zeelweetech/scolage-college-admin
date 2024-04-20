@@ -283,11 +283,11 @@ const CollegeImagesBlock = ({ info, fetchData }) => {
       fetchData();
       window.location.reload();
       toast.dismiss(loading);
-      toast.success("Details added successfully");
+      toast.success(data?.message);
     } catch (err) {
       console.log(err);
       toast.dismiss(loading);
-      toast.error("Details not added, please try again");
+      toast.error(err?.response?.data?.error);
     }
   };
 

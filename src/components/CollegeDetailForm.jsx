@@ -850,11 +850,11 @@ const CollegeDetailForm = ({ info, fetchData }) => {
       fetchData();
       window.location.reload();
       toast.dismiss(loading);
-      toast.success("Details updated successfully !!");
+      toast.success(data?.message);
     } catch (err) {
       console.log(err);
       toast.dismiss(loading);
-      toast.error("Something went wrong, please try again !!");
+      toast.error(err?.response?.data?.error);
     }
   };
 
@@ -894,7 +894,7 @@ const CollegeDetailForm = ({ info, fetchData }) => {
             handleChange={handleChange}
             title="College Name"
             id="collegeName"
-            placeholder="Kites Jr. College"
+            placeholder="Enter a college name"
           />
           <InputField
             name={"email"}
@@ -903,7 +903,7 @@ const CollegeDetailForm = ({ info, fetchData }) => {
             title="Email"
             type="email"
             id="email"
-            placeholder="tony@scolage.com"
+            placeholder="Enter a email"
           />
           <PhoneInput
             name="phone"
@@ -912,7 +912,7 @@ const CollegeDetailForm = ({ info, fetchData }) => {
             id={"phone"}
             title={"Phone"}
             type={"tel"}
-            placeholder={"+91 9949 34595"}
+            placeholder={"Enter a phone number 1"}
             phoneType={phoneType}
             setPhoneType={setPhoneType}
             options={typeOpt}
@@ -924,7 +924,7 @@ const CollegeDetailForm = ({ info, fetchData }) => {
             id={"phone2"}
             title={"Phone 2"}
             type={"tel"}
-            placeholder={"+91 9949 34595"}
+            placeholder={"Enter a phone number 2"}
             phoneType={phoneType2}
             setPhoneType={setPhoneType2}
             options={typeOpt}
@@ -937,7 +937,7 @@ const CollegeDetailForm = ({ info, fetchData }) => {
             handleChange={handleChange}
             value={formData?.address}
             id="address"
-            placeholder="Address"
+            placeholder="Enter an address"
           />
 
           {/* <CityBlock readOnly={!editable} />*/}
@@ -1078,7 +1078,7 @@ const CollegeDetailForm = ({ info, fetchData }) => {
                   value={formData?.no_of_floors}
                   name="no_of_floors"
                   onChange={handleChange}
-                  placeholder="12000"
+                  placeholder="5"
                 />
               </div>
             </div>
@@ -1184,7 +1184,7 @@ const CollegeDetailForm = ({ info, fetchData }) => {
             handleChange={handleChange}
             title="History and Achievements"
             id="History_Achievements"
-            placeholder="History_Achievements"
+            placeholder="Enter a history and achievements"
           />
           <InputField
             name={"Description"}
@@ -1192,7 +1192,7 @@ const CollegeDetailForm = ({ info, fetchData }) => {
             handleChange={handleChange}
             title="Description"
             id="Description"
-            placeholder="Description"
+            placeholder="Enter a description"
           />
 
           <MoreInfoField

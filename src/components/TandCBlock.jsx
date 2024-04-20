@@ -151,11 +151,11 @@ const TandCBlock = ({ info, fetchData }) => {
       fetchData();
       window.location.reload();
       toast.dismiss(loading);
-      toast.success("Details Updated successfully !!");
+      toast.success(data?.message);
     } catch (err) {
       console.log(err);
       toast.dismiss(loading);
-      toast.error("Failed to save details !!");
+      toast.error(err?.response?.data?.error);
     }
   };
 
@@ -171,6 +171,7 @@ const TandCBlock = ({ info, fetchData }) => {
               name="terms_condition"
               value={formData.terms_condition}
               onChange={handleChange}
+              placeholder="Enter a terms and condition"
             ></textarea>
           </div>
         </div>
@@ -180,28 +181,28 @@ const TandCBlock = ({ info, fetchData }) => {
           <InputField
             title={"website"}
             name="website"
-            placeholder={"www.example.com"}
+            placeholder={"Enter a website link"}
             value={formData.website}
             handleChange={handleChange}
           />
           <InputField
             title={"facebook"}
             name={"facebook"}
-            placeholder={"www.facebook.com/example"}
+            placeholder={"Enter a facebook link"}
             value={formData.facebook}
             handleChange={handleChange}
           />
           <InputField
             title={"youtube"}
             name={"youtube"}
-            placeholder={"www.youtube.com/example"}
+            placeholder={"Enter a youtube link"}
             value={formData.youtube}
             handleChange={handleChange}
           />
           <InputField
             title={"instagram"}
             name={"instagram"}
-            placeholder={"www.Instagrame.com/college"}
+            placeholder={"Enter a instagram link"}
             value={formData.instagram}
             handleChange={handleChange}
           />
